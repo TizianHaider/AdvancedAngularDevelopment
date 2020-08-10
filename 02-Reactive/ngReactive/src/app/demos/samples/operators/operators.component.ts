@@ -29,9 +29,18 @@ export class OperatorsComponent implements OnInit {
 
   response: any;
 
+  // declarative pattern
   vouchers$: Observable<Voucher[]> = this.vs.getVouchers();
 
-  ngOnInit() {}
+  // above declarative pattern better cause of having observable
+  vouchers: Voucher[];
+
+  ngOnInit() {
+    // classic subscribe patter -> unsubscribe
+    this.vs.getVouchers().subscribe((vs) => {
+      this.vouchers = vs;
+    });
+  }
 
   setLabel = (v) => ({ ...v, Label: `${v.Text} costs € ${v.Amount}` });
 
@@ -117,9 +126,9 @@ export class OperatorsComponent implements OnInit {
   }
 
   useDelay() {
-    const fakeObservable = of(['hund', 'katze', 'maus']).pipe(delay(5000));
+    const delayedObservable = of(['hund', 'katze', 'maus']).pipe(delay(5000));
     console.log('before delay execution - waiting 5 secs');
-    fakeObservable.subscribe((data) => console.log(data));
+    delayedObservable.subscribe((data) => console.log(data));
   }
 
   useReduce() {
