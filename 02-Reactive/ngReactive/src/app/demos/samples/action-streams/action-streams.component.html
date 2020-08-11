@@ -3,10 +3,9 @@
     <mat-form-field>
       <input
         matInput
-        (keyup)="handleFilter()"
-        [(ngModel)]="filter"
         type="text"
         placeholder="Enter Demo Partial to filter"
+        [formControl]="filter$"
       />
     </mat-form-field>
   </mat-toolbar-row>

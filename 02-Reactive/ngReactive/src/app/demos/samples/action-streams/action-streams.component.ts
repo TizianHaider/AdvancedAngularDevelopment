@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import { DemoItem } from '../../../model/demo/DemoItem';
 import { DemoService } from '../../demo.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-action-streams',
@@ -16,15 +17,20 @@ export class ActionStreamsComponent implements OnInit {
   demosData$: Observable<DemoItem[]> = this.ds.getItems();
 
   // Action Stream
-  filter: string;
-  private filterSubject = new BehaviorSubject<string>('');
-  filter$ = this.filterSubject.asObservable();
+  // filter: string;
+  // private filterSubject = new BehaviorSubject<string>('');
+  // filter$ = this.filterSubject.asObservable();
+
+  filter$ = new FormControl('');
 
   // Stream to bind the view to
   // Allways make sure to take combineLatest from rxjs and NOT rxjs/operators!!!!
-  demos$ = combineLatest([this.demosData$, this.filter$]).pipe(
+  demos$ = combineLatest([
+    this.demosData$,
+    this.filter$.valueChanges.pipe(startWith('')),
+  ]).pipe(
     map(([demos, filter]) => {
-      return filter != ''
+      return filter !== ''
         ? demos.filter((d) =>
             d.title.toLowerCase().includes(filter.toLowerCase())
           )
@@ -34,8 +40,8 @@ export class ActionStreamsComponent implements OnInit {
 
   ngOnInit() {}
 
-  handleFilter() {
-    console.log(this.filter);
-    this.filterSubject.next(this.filter);
-  }
+  // handleFilter() {
+  //   console.log(this.filter);
+  //   this.filterSubject.next(this.filter);
+  // }
 }
