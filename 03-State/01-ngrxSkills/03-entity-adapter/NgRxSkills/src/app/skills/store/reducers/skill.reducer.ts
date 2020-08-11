@@ -41,6 +41,7 @@ export function SkillReducer(
     case SkillActionTypes.LoadSkills: {
       return { ...state, loading: true };
     }
+
     case SkillActionTypes.LoadSkills_Success: {
       return skillAdapter.setAll(action.payload, {
         ...state,
@@ -48,19 +49,24 @@ export function SkillReducer(
         loaded: true,
       });
     }
+
     case SkillActionTypes.LoadSkills_Error: {
       return { ...state, loaded: false, loading: false };
     }
+
     case SkillActionTypes.AddSkill:
       return skillAdapter.addOne(action.payload, { ...state });
+
     case SkillActionTypes.DeleteSkill:
       return skillAdapter.removeOne(action.payload.id, { ...state });
+
     case SkillActionTypes.ToggleComplete:
       const updateSkill: Update<Skill> = {
         id: action.payload.id,
         changes: { completed: !action.payload.completed },
       };
       return skillAdapter.updateOne(updateSkill, { ...state });
+
     default:
       return state;
   }

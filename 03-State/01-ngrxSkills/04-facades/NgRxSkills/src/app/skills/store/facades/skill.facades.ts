@@ -6,14 +6,19 @@ import { Skill } from '../models/skill.model';
 import {
   ToggleCompleteAction,
   AddSkillAction,
-  DeleteSkillAction
+  DeleteSkillAction,
+  LoadSkillsAction,
 } from '../actions/skill.actions';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SkillFacade {
   constructor(private store: Store<SkillsState>) {}
+
+  initSkills() {
+    this.store.dispatch(new LoadSkillsAction());
+  }
 
   getSkills() {
     return this.store.select(getAllSkills);
