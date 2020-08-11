@@ -1,5 +1,5 @@
 <app-food-list
-  [food]="food"
+  [food]="food$ | async"
   (editSelected)="selectFood($event)"
   (deleteSelected)="deleteFood($event)"
 ></app-food-list>
