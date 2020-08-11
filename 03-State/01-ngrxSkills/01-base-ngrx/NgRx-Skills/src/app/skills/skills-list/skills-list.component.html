@@ -20,7 +20,7 @@
       fxLayoutAlign="space-between center"
       fxFill
     >
-      <div fxFlex="3 1 auto" style="padding-left: 2rem">{{ s.name }}</div>
+      <div fxFlex="3 1 auto" style="padding-left: 2rem;">{{ s.name }}</div>
       <div fxFlex="1 1 140px">
         <mat-slide-toggle
           color="primary"
@@ -37,3 +37,7 @@
     </div>
   </mat-card-content>
 </mat-card>
+
+<button mat-raised-button color="primary" (click)="toggleMenuVisible()">
+  Toggle Menu
+</button>

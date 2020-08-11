@@ -8,8 +8,10 @@ export enum SkillActionTypes {
   AddSkill = '[Skill] Add Skills',
   DeleteSkill = '[Skill] Delete Skills',
   ToggleComplete = '[Skill] ToggleComplete',
+  ToggleMenuVisible = '[Skill] ToggleMenuVisible',
 }
 
+// action creator
 export class LoadSkillsAction implements Action {
   readonly type = SkillActionTypes.LoadSkills;
 }
@@ -39,10 +41,16 @@ export class ToggleCompleteAction implements Action {
   constructor(public payload: Skill) {}
 }
 
+export class ToggleMenuVisibleAction implements Action {
+  readonly type = SkillActionTypes.ToggleMenuVisible;
+}
+
+// add action to union type
 export type SkillActionsUnion =
   | LoadSkillsAction
   | LoadSkillsSuccess
   | LoadSkillsError
   | AddSkillAction
   | DeleteSkillAction
-  | ToggleCompleteAction;
+  | ToggleCompleteAction
+  | ToggleMenuVisibleAction;

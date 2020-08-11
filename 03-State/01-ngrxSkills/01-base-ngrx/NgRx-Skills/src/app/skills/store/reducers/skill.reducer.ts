@@ -7,6 +7,7 @@ export const skillFeatureKey = 'skills';
 export interface SkillsState {
   skills: Skill[];
   loaded: boolean;
+  menuVisible: boolean;
 }
 
 export const initialState = {
@@ -15,6 +16,7 @@ export const initialState = {
     { id: '456', name: 'ngrx', completed: false },
   ],
   loaded: false,
+  menuVisible: true,
 };
 
 // Reducer
@@ -31,6 +33,8 @@ export function SkillReducer(
       return { ...state, skills: arrDel };
     case SkillActionTypes.ToggleComplete:
       return { ...state };
+    case SkillActionTypes.ToggleMenuVisible:
+      return { ...state, menuVisible: !state.menuVisible };
     default:
       return state;
   }
