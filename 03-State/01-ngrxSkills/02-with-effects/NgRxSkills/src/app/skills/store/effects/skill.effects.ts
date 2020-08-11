@@ -13,7 +13,7 @@ export class SkillsEffects {
 
   // Note: Make sure you are starting json-server or your api before using this
   @Effect()
-  loadVouchers$: Observable<Action> = this.actions$.pipe(
+  loadSkills$: Observable<Action> = this.actions$.pipe(
     ofType(skillActions.SkillActionTypes.LoadSkills),
     mergeMap((action) =>
       this.service.getSkills().pipe(
