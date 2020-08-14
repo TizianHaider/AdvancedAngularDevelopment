@@ -28,6 +28,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -92,6 +93,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -123,6 +125,50 @@
           }
         }
       }
-    }},
-  "defaultProject": "nglibs"
+    },
+    "ux-controls": {
+      "projectType": "library",
+      "root": "projects/ux-controls",
+      "sourceRoot": "projects/ux-controls/src",
+      "prefix": "ux",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ux-controls/tsconfig.lib.json",
+            "project": "projects/ux-controls/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ux-controls/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ux-controls/src/test.ts",
+            "tsConfig": "projects/ux-controls/tsconfig.spec.json",
+            "karmaConfig": "projects/ux-controls/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ux-controls/tsconfig.lib.json",
+              "projects/ux-controls/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "nglibs",
+  "cli": {
+    "analytics": false
+  }
 }
